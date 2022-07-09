@@ -43,7 +43,7 @@ app.put('/users/:userId', (req, res) => {
     const updatedUser = req.body;
 
     users = users.map(user => {
-        if (Number(user.id) === userId) {
+        if (Number(userId) === user.id) {
             return updatedUser;
         }
 
