@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors"
 import {StatusCodes} from "http-status-codes";
 
 const app = express();
@@ -9,19 +10,19 @@ let users = [
 ];
 
 app.use(express.json());
-
+app.use(cors())
 
 app.listen(PORT, () => {
     console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
 
 app.get('/', (req, res) => {
-    res.setHeader("Access-Control-Allow-Origin", "*");
+
     return res.send('<h1>Hello World</h1>');
 });
   
 app.get('/users', (req, res) => {
-    res.setHeader("Access-Control-Allow-Origin", "*");
+
     return res.send(users);
 });
 
@@ -30,7 +31,7 @@ app.get('/users/:userId', (req, res) => {
     const user = users.find(user => {
         return user.id === Number(userId);
     });
-    res.setHeader("Access-Control-Allow-Origin", "*");
+
     return res.send(user);
 });
 
@@ -39,7 +40,7 @@ app.post('/users', (req, res) => {
 
     users.push(newUser);
 
-    res.setHeader("Access-Control-Allow-Origin", "*");
+
     return res.status(StatusCodes.CREATED).send(newUser);
 })
 
@@ -54,7 +55,7 @@ app.put('/users/:userId', (req, res) => {
 
         return user;
     })
-    
-    res.setHeader("Access-Control-Allow-Origin", "*");
+
+
     return res.send(updatedUser);
 });
